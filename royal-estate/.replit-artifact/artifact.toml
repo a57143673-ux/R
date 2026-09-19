@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "رويال للعقارات"
+version = "1.0.0"
+id = "artifacts/royal-estate"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20211
+
+[services.development]
+run = "pnpm --filter @workspace/royal-estate run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/royal-estate", "run", "build" ]
+publicDir = "artifacts/royal-estate/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20211"
+BASE_PATH = "/"
